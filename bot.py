@@ -12,7 +12,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 
 CHOOSING, ANGEL, MORTAL = range(3)
 
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', 80))
 
 
 # Enable logging
@@ -220,8 +220,8 @@ def main():
     # Start the Bot
     updater.start_webhook(listen="0.0.0.0",
                           port=int(PORT),
-                          url_path=config.ANGEL_BOT_TOKEN)
-    updater.bot.setWebhook('https://nus-sb-bot.herokuapp.com/' + config.ANGEL_BOT_TOKEN)
+                          url_path=config.ANGEL_BOT_TOKEN,
+                          webhook_url='https://nus-sb-bot.herokuapp.com/' + config.ANGEL_BOT_TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
