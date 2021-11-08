@@ -1,4 +1,5 @@
 import logging
+import os
 import player
 import messages
 import datetime
@@ -10,6 +11,8 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext, ConversationHandler, CallbackQueryHandler
 
 CHOOSING, ANGEL, MORTAL = range(3)
+
+PORT = int(os.environ.get('PORT', 5000))
 
 
 # Enable logging
@@ -215,7 +218,10 @@ def main():
     dispatcher.add_handler(conv_handler)
 
     # Start the Bot
-    updater.start_polling()
+    updater.start_webhook(listen="0.0.0.0",
+                          port=int(PORT),
+                          url_path=TOKEN)
+    updater.bot.setWebhook('https://nus-sb-bot.herokuapp.com/' + TOKEN)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
