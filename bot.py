@@ -12,7 +12,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 
 CHOOSING, ANGEL, MORTAL = range(3)
 
-PORT = int(os.environ.get('PORT', 13978))
+PORT = int(os.environ.get('PORT', 5000))
 
 
 # Enable logging
